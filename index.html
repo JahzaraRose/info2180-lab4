@@ -3,15 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Superheroes List</title>
+    <title>Avengers Character Library</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="app.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Superheroes List</h1>
-        <button id="searchButton">Search</button>
-    </div>
-
-    <script src="app.js"></script>
+    <header>
+        <div class="container">
+            <h1>Avengers Character Search</h1>
+        </div>
+    <header>
+    <main>   
+        <div class="container">  
+            <h4 id="search">Search by Full Name or Alias </h4>
+            <form>
+                <input id="userinput" name="search" type="text" placeholder="e.g
+                Captain America or Steve Rogers"/>
+                <button name="searchbtn" id="searchBtn" type="button">Search</button>
+            </form>    
+            <h1 id="resulth">Search Result</h1>
+            <div id="result"></div>
+        </div>    
+    </main>
 </body>
 </html>
