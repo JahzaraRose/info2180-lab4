@@ -63,10 +63,29 @@ $superheroes = [
   ], 
 ];
 
-?>
+$hero = filter_input(INPUT_GET,'query');
+$search = "false";
+if ($hero == ""):
+    ?>
+        <u1>
+        <?php foreach ($superheroes as $superhero): ?>
+            <li><?= $superhero['alias']; ?></li>
+        <?php endforeach; ?>
+        </u1>   
+    <?php
 
-<ul>
-<?php foreach ($superheroes as $superhero): ?>
-  <li><?= $superhero['alias']; ?></li>
-<?php endforeach; ?>
-</ul>
+else:
+    foreach ($superheroes as $superhero):
+        if ($superhero['alias'] == $hero or $superhero['name'] == $hero):
+            $search = "true";
+            ?><h3><?= $superhero['alias']; ?></h3>
+            <h4> A.K.A <?= $superhero['name']; ?></h4>
+            <p><?= $superhero['biography']; ?></p>
+            <?php
+        endif;
+    endforeach;
+    if ($search == "false"):
+        ?> <p style="color: red"> Superhero not found </p> <?php
+    endif;
+endif;
+    ?>
