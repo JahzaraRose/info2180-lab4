@@ -1,24 +1,34 @@
-// Listen for the button click
-document.getElementById("search").addEventListener("click", function () {
-    // Create a new XMLHttpRequest object
-    const xhr = new XMLHttpRequest();
+function searchList() {
+    const result = document.getElementById("result");
+    const val = document.getElementById("userinput").value.trim();
+    const req = new XMLHttpRequest();
 
-    // Open the GET request to superheroes.php
-    xhr.open("GET", "superheroes.php", true);
-
-    // Handle the response
-    xhr.onload = function () {
-        if (this.status === 200) {
-            // Parse the JSON response
-            const superheroes = JSON.parse(this.responseText);
-
-            // Display the list in an alert
-            alert("Superheroes:\n" + superheroes.join("\n"));
-        } else {
-            alert("Error fetching superheroes.");
+    req.onreadystatechange = function () {
+        if (req.readyState === XMLHttpRequest.DONE) {
+            if (req.status === 200) {
+                // Check if the response includes a 'not-found' indicator
+                if (req.responseText.includes('id="not-found"')) {
+                    result.innerHTML = `<p style="color: red; font-weight: bold;">Superhero not found</p>`;
+                } else {
+                    result.innerHTML = req.responseText; // Insert response into result div
+                }
+            } else {
+                console.log("There seems to be an error!");
+            }
         }
     };
 
-    // Send the request
-    xhr.send();
-});
+    // Send GET request to the PHP endpoint with the search query
+    req.open(
+        "GET",
+        `http://localhost/info2180-lab4/superheroes.php?query=${encodeURIComponent(val)}`,
+        true
+    );
+    req.send();
+}
+
+window.onload = function () {
+    console.log("Page successfully loaded");
+    const button = document.getElementById("searchBtn");
+    button.addEventListener("click", searchList);
+};
