@@ -1,6 +1,8 @@
-function searchList() {
+function searchList() 
+{
     var result = document.getElementById("result");
-    var val = document.getElementById("userinput").value.trim();
+    var val = document.getElementById("userinput");
+
     var req = new XMLHttpRequest();
 
     req.onreadystatechange = function () {
@@ -10,9 +12,9 @@ function searchList() {
                 result.innerHTML = req.responseText;
             }
             if (req.responseText.includes('id="not-found"')) 
-                {
-                    result.innerHTML = `<p style="color: red; font-weight: bold;">Avenger not found</p>`;
-                } 
+            {
+                result.innerHTML = `<p style="color: red; font-weight: bold;">Avenger not found</p>`;
+            } 
             else 
             {
                 console.log("There seems to be an error!");
