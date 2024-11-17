@@ -5,14 +5,16 @@ function searchList() {
 
     req.onreadystatechange = function () {
         if (req.readyState === XMLHttpRequest.DONE) {
-            if (req.status === 200) {
-                // Check if the response includes a 'not-found' indicator
-                if (req.responseText.includes('id="not-found"')) {
-                    result.innerHTML = `<p style="color: red; font-weight: bold;">Superhero not found</p>`;
-                } else {
-                    result.innerHTML = req.responseText; // Insert response into result div
-                }
-            } else {
+            if (req.status === 200) 
+            {
+                result.innerHTML = req.responseText;
+            }
+            if (req.responseText.includes('id="not-found"')) 
+                {
+                    result.innerHTML = `<p style="color: red; font-weight: bold;">Avenger not found</p>`;
+                } 
+            else 
+            {
                 console.log("There seems to be an error!");
             }
         }
@@ -26,5 +28,5 @@ function searchList() {
 window.onload = function () {
     console.log("Page successfully loaded");
     var but = document.getElementById("searchBtn");
-    button.addEventListener("click", searchList);
+    but.addEventListener("click", searchList);
 };
